@@ -40,8 +40,13 @@ class Store
         }
     }
     void maxSort()
-    {
+    {   
+        make_heap(items.begin(), items.end(), [](Item a, Item b) { return a.price < b.price; });
         sort_heap(items.begin(), items.end(), [](Item a, Item b) { return a.price < b.price; });
+    }
+    void minSort()
+    {
+        make_heap(items.begin(), items.end(), [](Item a, Item b) { return a.price > b.price; });
         sort_heap(items.begin(), items.end(), [](Item a, Item b) { return a.price > b.price; });
     }
     void printItems()
@@ -58,8 +63,12 @@ int main()
     Store store;
     store.storeInput();
     cout << endl;
-    
+    cout << "Sorted by price: cheap to expensive: " << endl;
     store.maxSort();
+    store.printItems();
+    cout << endl;
+    cout << "Sorted by price expensive to cheap: " << endl;
+    store.minSort();
     store.printItems();
     return 0;
 }
